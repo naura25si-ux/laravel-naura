@@ -74,18 +74,25 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#">Contact</a>
                     </li>
+
+                     <li class="nav-item">
+                        <a class="nav-link" href="#">About</a>
+                    </li>
+                    
                 </ul>
             </div>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="hero-section">
-        <div class="container">
-<h1> {{ $username }} </h1>
-<p> {{ $last_login }} </p>
-        </div>
-    </section>
+<form action="{{ url('/auth/login') }}" method="POST">
+    @csrf
+
+    <input type="text" name="username" placeholder="Masukkan username">
+
+    <input type="password" name="password" placeholder="Masukkan password">
+
+    <button type="submit">Submit</button>
+</form>
 
     <!-- Content Section -->
     <section id="content" class="container ">
@@ -151,6 +158,38 @@
                     </div>
                 </div>
             </div>
+
+<div class="row">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Form Pertanyaan</h5>
+
+            <form action="{{ route('question.store') }}" method="POST">
+                @csrf
+
+                <div class="mb-3">
+                    <label for="nama" class="form-label">Nama</label>
+                    <input type="text" class="form-control" name="nama">
+                </div>
+
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="text" class="form-control" name="email">
+                </div>
+
+                <div class="mb-3">
+                    <label for="pertanyaan" class="form-label">Pertanyaan</label>
+                    <textarea class="form-control" name="pertanyaan"></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary">
+                    Kirim Pertanyaan
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+
 
             <div class="col-md-6">
                 {{-- Alerts --}}
