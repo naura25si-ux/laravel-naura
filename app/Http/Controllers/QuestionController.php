@@ -22,20 +22,25 @@ class QuestionController extends Controller
         //
     }
 
-  public function store(Request $request)
-{
-    //dd($request->all());
 
-    $data['nama']        = $request->nama;
-    $data['email']       = $request->email;
-    $data['pertanyaan']  = $request->pertanyaan;
-
-    return view('home-question-respon', $data);
-}
     /**
      * Store a newly created resource in storage.
      */
+public function store(Request $request)
+{
+    // dd($request->all());
+    $request->validate([
+        'nama' => 'required|max:10',
+        'email' => ['required','email'],
+        'pertanyaan' => 'required|max:300|min:8',
+    ]);
 
+    $data['nama']       = $request->nama;
+    $data['email']      = $request->email;
+    $data['pertanyaan'] = $request->pertanyaan;
+
+    return redirect()->route('home-question-respon')->with($data);
+}
     /**
      * Display the specified resource.
      */
